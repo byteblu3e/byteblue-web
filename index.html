@@ -5,43 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>byteblue</title>
 
-    <!-- Google / SEO -->
-    <meta name="description" content="byteblue — developer and roblox external developer. home of bluberii, roblox versions, sources, offsets, and more." />
+    <meta name="description" content="byteblue - developer and roblox external developer. also has sources." />
     <meta name="keywords" content="byteblue, bluberii, roblox, executor, offsets, sources, external, luau, c++" />
     <meta name="author" content="byteblue" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://byteblue.dev/" />
-    <link rel="icon" type="image/png" href="assets/pfp.png" />
 
-    <!-- Discord / Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://byteblue.dev/" />
     <meta property="og:title" content="byteblue" />
-    <meta property="og:description" content="developer and roblox external dev. also includes sources" />
-    <meta property="og:image" content="https://byteblue.dev/assets/embed.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="developer and roblox external dev. also has sources." />
+    <meta property="og:image" content="https://byteblue.dev/assets/pfp.png" />
     <meta property="og:site_name" content="byteblue" />
     <meta property="og:locale" content="en_US" />
     <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
 
-    <!-- Twitter / X -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="byteblue" />
-    <meta name="twitter:description" content="developer and roblox external dev. also includes sources" />
-    <meta name="twitter:image" content="https://byteblue.dev/assets/embed.png" />
+    <meta name="twitter:description" content="developer and roblox external dev. also has sources." />
+    <meta name="twitter:image" content="https://byteblue.dev/assets/pfp.png" />
 
-    <!-- Structured data (Google) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "byteblue",
       "url": "https://byteblue.dev/",
-      "image": "https://byteblue.dev/assets/embed.png",
+      "image": "https://byteblue.dev/assets/pfp.png",
       "jobTitle": "Developer",
-      "description": "developer and roblox external developer, creator of bluberii",
+      "description": "developer and roblox external developer. also has sources.",
       "sameAs": ["https://github.com/byteblu3e"]
     }
     </script>
@@ -49,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300..1000;1,300..1000&display=swap" rel="stylesheet">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -66,36 +59,30 @@
             }
         }
     </script>
-    
+
     <style>
         :root {
             --bg-gradient: radial-gradient(ellipse 140% 110% at 50% -30%, #ffffff 0%, #f5f5f5 35%, #ebebeb 65%, #e0e0e0 100%);
             --text-main: #111111;
             --text-muted: #52525b;
             --text-dark: #1f2937;
-            
             --glass-bg-1: rgba(255, 255, 255, 0.75);
             --glass-bg-2: rgba(255, 255, 255, 0.45);
             --glass-border: rgba(255, 255, 255, 0.9);
             --glass-hover-border: rgba(255, 255, 255, 1);
             --glass-inner: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
             --glass-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.1), 0 4px 12px -5px rgba(0, 0, 0, 0.05);
-            
             --topbar-scrolled: rgba(255, 255, 255, 0.85);
             --topbar-border: rgba(255, 255, 255, 0.9);
-            
             --orb-1: rgba(100, 100, 100, 0.08);
             --orb-2: rgba(150, 150, 150, 0.06);
             --orb-3: rgba(200, 200, 200, 0.04);
-            
             --btn-bg: rgba(255, 255, 255, 0.6);
             --btn-border: rgba(255, 255, 255, 0.9);
             --btn-hover: rgba(255, 255, 255, 0.9);
-            
             --item-bg: rgba(255, 255, 255, 0.4);
             --item-hover: rgba(255, 255, 255, 0.8);
             --item-border: rgba(255, 255, 255, 0.7);
-
             --divider: rgba(0, 0, 0, 0.05);
         }
 
@@ -104,36 +91,29 @@
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
             --text-dark: #e4e4e7;
-            
             --glass-bg-1: rgba(255, 255, 255, 0.08);
             --glass-bg-2: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.12);
             --glass-hover-border: rgba(255, 255, 255, 0.25);
             --glass-inner: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
             --glass-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
-            
             --topbar-scrolled: rgba(20, 20, 20, 0.85);
             --topbar-border: rgba(255, 255, 255, 0.1);
-            
             --orb-1: rgba(200, 200, 200, 0.10);
             --orb-2: rgba(160, 160, 160, 0.08);
             --orb-3: rgba(220, 220, 220, 0.06);
-            
             --btn-bg: rgba(255, 255, 255, 0.08);
             --btn-border: rgba(255, 255, 255, 0.12);
             --btn-hover: rgba(255, 255, 255, 0.16);
-            
             --item-bg: rgba(255, 255, 255, 0.04);
             --item-hover: rgba(255, 255, 255, 0.08);
             --item-border: rgba(255, 255, 255, 0.08);
-
             --divider: rgba(255, 255, 255, 0.05);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { height: 100%; }
-        
+
         body {
             font-family: 'Nunito', sans-serif;
             background: var(--bg-gradient);
@@ -164,13 +144,8 @@
         body.dark-mode .nav-link:hover, body.dark-mode .nav-link.active { color: #ffffff; }
         body.dark-mode .pfp-avatar { border-color: rgba(255,255,255,0.15); }
 
-        .cred-icon {
-            filter: invert(1) brightness(0.2);
-            transition: filter 0.3s ease;
-        }
-        body.dark-mode .cred-icon {
-            filter: none;
-        }
+        .cred-icon { filter: invert(1) brightness(0.2); transition: filter 0.3s ease; }
+        body.dark-mode .cred-icon { filter: none; }
 
         .bg-orbs {
             position: fixed;
@@ -225,7 +200,7 @@
             border: 1px solid transparent;
             border-radius: 16px;
         }
-        
+
         .topbar.scrolled {
             background: var(--topbar-scrolled);
             backdrop-filter: blur(24px) saturate(200%);
@@ -235,12 +210,8 @@
             top: 12px;
         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        
+        .nav-links { display: flex; align-items: center; gap: 18px; }
+
         .nav-link {
             font-size: 14px;
             font-weight: 800;
@@ -255,7 +226,7 @@
             transition: all 0.2s ease;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
-        
+
         .nav-link svg, .nav-link img { width: 18px; height: 18px; transition: transform 0.2s ease; }
         .nav-link:hover svg, .nav-link:hover img { transform: scale(1.1); }
         .nav-link:active { transform: scale(0.95); }
@@ -265,18 +236,16 @@
             image-rendering: -webkit-optimize-contrast;
             transition: filter 0.2s ease;
         }
-        
-        .nav-link:hover img[alt="roblox"], 
+
+        .nav-link:hover img[alt="roblox"],
         .nav-link.active img[alt="roblox"],
         .section-title img[alt="roblox"] {
             filter: brightness(0) invert(0);
         }
-        
-        body.dark-mode img[alt="roblox"] {
-            filter: brightness(0) invert(0.65);
-        }
-        
-        body.dark-mode .nav-link:hover img[alt="roblox"], 
+
+        body.dark-mode img[alt="roblox"] { filter: brightness(0) invert(0.65); }
+
+        body.dark-mode .nav-link:hover img[alt="roblox"],
         body.dark-mode .nav-link.active img[alt="roblox"],
         body.dark-mode .section-title img[alt="roblox"] {
             filter: brightness(0) invert(1);
@@ -303,7 +272,7 @@
             top: 0; left: 0;
             pointer-events: none;
         }
-        
+
         .page-view.active {
             opacity: 1;
             transform: translateY(0);
@@ -324,9 +293,7 @@
             animation: cardEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
 
-        .glass-card:hover {
-            border-color: var(--glass-hover-border);
-        }
+        .glass-card:hover { border-color: var(--glass-hover-border); }
 
         @keyframes cardEnter {
             0% { opacity: 0; transform: translateY(15px) scale(0.97); }
@@ -344,7 +311,7 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); border-color: var(--glass-border); }
         }
         .flash-update { animation: flashUpdate 1s ease-out; }
-        
+
         @keyframes versionPulse {
             0% { opacity: 0; transform: translateY(-5px) scale(0.98); filter: blur(4px); }
             100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
@@ -366,14 +333,14 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .source-item:hover {
             background: var(--item-hover);
             border-color: var(--glass-hover-border);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px -8px rgba(0,0,0,0.15);
         }
-        
+
         .source-item .download-icon { transition: transform 0.3s ease, color 0.3s ease; flex-shrink: 0; }
         .source-item:hover .download-icon { color: var(--text-main); transform: translateY(2px); }
 
@@ -386,7 +353,7 @@
             color: var(--text-main);
             transform: translateY(-1px);
         }
-        
+
         .inline-icon {
             width: 18px; height: 18px;
             object-fit: contain;
@@ -400,7 +367,7 @@
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease-out, padding 0.3s ease-out, margin 0.3s ease-out;
         }
-        
+
         .accordion-content.open {
             max-height: 1200px;
             opacity: 1;
@@ -408,7 +375,7 @@
             margin-top: 12px;
             border-top: 1px solid var(--divider);
         }
-        
+
         .rotate-180 { transform: rotate(180deg); }
 
         .notice {
@@ -423,12 +390,12 @@
             border-radius: 8px;
             margin-bottom: 16px;
         }
-        
+
         .notice svg { width: 13px; height: 13px; flex-shrink: 0; margin-top: 1px; }
-        
+
         .notice-red { background: rgba(239, 68, 68, 0.10); border: 1px solid rgba(239, 68, 68, 0.22); color: #f87171; }
         body:not(.dark-mode) .notice-red { background: rgba(239, 68, 68, 0.1); color: #b91c1c; border-color: rgba(239, 68, 68, 0.3); }
-        
+
         .notice-yellow { background: rgba(234, 179, 8, 0.10); border: 1px solid rgba(234, 179, 8, 0.22); color: #facc15; }
         body:not(.dark-mode) .notice-yellow { background: rgba(234, 179, 8, 0.1); color: #a16207; border-color: rgba(234, 179, 8, 0.3); }
 
@@ -450,12 +417,12 @@
             box-shadow: var(--glass-inner), 0 4px 10px -5px rgba(0,0,0,0.1);
             animation: floatBubble 4s ease-in-out infinite;
         }
-        
+
         .lang-bubble:nth-child(even) { animation-delay: -2s; }
         .lang-bubble:nth-child(3n) { animation-delay: -1s; }
-        
+
         .lang-bubble img { width: 16px; height: 16px; object-fit: contain; transition: transform 0.3s ease; }
-        
+
         .lang-bubble:hover {
             transform: translateY(-4px) scale(1.05);
             background: var(--item-hover);
@@ -464,7 +431,7 @@
             box-shadow: var(--glass-inner), 0 8px 20px -5px rgba(0,0,0,0.15);
             animation-play-state: paused;
         }
-        
+
         .lang-bubble:hover img { transform: scale(1.15) rotate(5deg); }
 
         .section-title { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
@@ -477,38 +444,31 @@
             transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        
+
         .btn-download:hover {
             background: var(--btn-hover);
             border-color: var(--glass-hover-border);
             transform: translateY(-1px) scale(1.02);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        .btn-download:active {
-            transform: translateY(1px) scale(0.98);
-        }
+
+        .btn-download:active { transform: translateY(1px) scale(0.98); }
 
         .crypto-box {
             background: var(--item-bg);
             border: 1px solid var(--item-border);
             transition: all 0.2s ease;
         }
-        
+
         .crypto-box:hover {
             background: var(--item-hover);
             border-color: var(--glass-hover-border);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px -4px rgba(0,0,0,0.1);
         }
-        
-        .crypto-box .crypto-icon {
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .crypto-box:hover .crypto-icon {
-            transform: scale(1.15) rotate(-5deg);
-        }
+
+        .crypto-box .crypto-icon { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .crypto-box:hover .crypto-icon { transform: scale(1.15) rotate(-5deg); }
 
         .toast {
             position: fixed;
@@ -533,7 +493,7 @@
             z-index: 2000;
             box-shadow: var(--glass-shadow);
         }
-        
+
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast svg { width: 15px; height: 15px; color: var(--text-muted); flex-shrink: 0; }
 
@@ -572,7 +532,7 @@
                 <span>account gen</span>
             </button>
         </div>
-        
+
         <div class="flex items-center gap-4">
             <button onclick="toggleTheme()" class="nav-link !p-0" aria-label="Toggle Theme">
                 <svg id="icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -622,7 +582,7 @@
                     </span>.
                     It will release shortly with:
                 </p>
-                
+
                 <div class="flex items-center justify-center gap-12 py-2">
                     <div class="text-center transform transition-transform hover:scale-110 duration-300">
                         <div class="text-4xl font-black text-white leading-none drop-shadow-sm" id="stat-unc">0%</div>
@@ -646,7 +606,7 @@
                 <div class="pt-8 mt-4 border-t border-black/5 dark:border-white/10 w-full max-w-sm flex flex-col items-center gap-4 transition-colors duration-300">
                     <p class="text-sm font-bold text-gray-200 lowercase">want to help me out?</p>
                     <div class="flex flex-col gap-3 w-full">
-                        
+
                         <div class="crypto-box rounded-xl p-3 flex items-center gap-3 w-full group">
                             <div class="w-8 h-8 rounded-full bg-[#345D9D]/10 flex items-center justify-center flex-shrink-0 crypto-icon shadow-sm">
                                 <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png?v=026" alt="LTC" class="w-4 h-4 object-contain">
@@ -671,14 +631,14 @@
         </section>
 
         <section id="page-versions" class="page-view space-y-4">
-            
+
             <div class="flex items-center justify-center mt-6">
                 <h2 class="section-title text-xl font-black text-white lowercase flex items-center justify-center gap-2">
                     <img src="assets/roblox.png" alt="roblox" class="w-5 h-5 object-contain" onerror="this.onerror=null; this.src='https://www.roblox.com/favicon.ico';">
                     roblox version
                 </h2>
             </div>
-            
+
             <div class="glass-card space-y-4">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-gray-400 lowercase">current version</span>
@@ -688,7 +648,7 @@
                 <div class="py-3 text-center">
                     <p id="current-version-text" class="text-xl font-mono text-white font-bold tracking-wider transition-colors duration-300">version-4ea8e85481e34f46</p>
                 </div>
-                
+
                 <div class="grid grid-cols-2 gap-3">
                     <button id="btn-download-zip" onclick="downloadRobloxZip()" class="btn-download font-extrabold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-2">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -721,7 +681,7 @@
             </div>
 
             <div class="space-y-3">
-                
+
                 <div class="glass-card cursor-pointer overflow-hidden hover:border-white/20">
                     <div class="flex items-center justify-between" onclick="toggleAccordion('modules', 'icon-modules')">
                         <div class="flex items-center gap-3">
@@ -732,13 +692,13 @@
                         </div>
                         <svg id="icon-modules" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
-                    
+
                     <div id="content-modules" class="accordion-content text-sm text-gray-400">
                         <div class="notice notice-red mb-4">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                            <span>Some modules aren't updated to the latest version — use at your own risk.</span>
+                            <span>Some modules aren't updated to the latest version - use at your own risk.</span>
                         </div>
-                        
+
                         <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-4">External</div>
                         <div class="flex flex-col gap-1">
                             <a href="https://github.com/byteblu3e/offsets/raw/main/modules/external/kitty-v1.1.zip" target="_blank" class="source-item">
@@ -854,7 +814,7 @@
                         <svg id="icon-misc" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                     <div id="content-misc" class="accordion-content text-sm text-gray-400">
-                        
+
                         <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-2">Internal Offsets/Struct/Encryptions</div>
                         <div class="flex flex-col gap-1 mb-4">
                             <a href="https://offsets.credosdev.lol/" target="_blank" class="source-item">
@@ -893,7 +853,7 @@
 
                         <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-5">Useful Servers</div>
                         <div class="flex flex-col gap-1">
-                            
+
                             <a href="https://discord.gg/VjB3S6FvUy" target="_blank" class="source-item">
                                 <img src="assets/skidleaks.png" alt="SkidLeaks Icon" class="w-10 h-10 object-contain rounded-md flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=D';">
                                 <div class="flex-1">
@@ -966,9 +926,9 @@
         function animateValue(id, start, end, duration, suffix = '') {
             const obj = document.getElementById(id);
             if (!obj) return;
-            
+
             if (obj._animId) cancelAnimationFrame(obj._animId);
-            
+
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
@@ -976,14 +936,14 @@
                 const c1 = 1.70158;
                 const c3 = c1 + 1;
                 const easeProgress = 1 + c3 * Math.pow(progress - 1, 3) + c1 * Math.pow(progress - 1, 2);
-                
+
                 const current = Math.floor(easeProgress * (end - start) + start);
                 obj.textContent = current + suffix;
-                
+
                 if (progress < 1) {
                     obj._animId = window.requestAnimationFrame(step);
                 } else {
-                    obj.textContent = end + suffix; 
+                    obj.textContent = end + suffix;
                     obj._animId = null;
                 }
             };
@@ -1009,7 +969,7 @@
             canvas = document.getElementById('fx-canvas');
             ctx = canvas.getContext('2d');
             dpr = Math.min(window.devicePixelRatio || 1, 2);
-            
+
             function resize() {
                 W = window.innerWidth;
                 H = window.innerHeight;
@@ -1096,7 +1056,7 @@
             const toastMsg = document.getElementById('toast-msg');
             toastMsg.textContent = msg;
             toast.classList.add('show');
-            
+
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
@@ -1116,7 +1076,7 @@
             const n = document.getElementById('nav-' + tabId);
             if (n) n.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
+
             if (tabId === 'home') {
                 triggerCounters();
             }
@@ -1138,12 +1098,12 @@
         function renderOldVersions() {
             const container = document.getElementById('old-versions-container');
             const list = document.getElementById('old-versions-list');
-            
+
             if (oldVersions.length === 0) {
                 container.classList.add('hidden');
                 return;
             }
-            
+
             container.classList.remove('hidden');
             list.innerHTML = oldVersions.map(v => `
                 <div class="flex items-center justify-between p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10 transition-colors duration-300">
@@ -1201,24 +1161,24 @@
 
                 if (parsed && parsed.clientVersionUpload) {
                     const fetchedVer = parsed.clientVersionUpload;
-                    
+
                     if (fetchedVer !== currentVersionGUID) {
                         if (currentVersionGUID && !oldVersions.includes(currentVersionGUID)) {
                             oldVersions.unshift(currentVersionGUID);
                             localStorage.setItem('rbx_old_versions', JSON.stringify(oldVersions));
                             renderOldVersions();
                         }
-                        
+
                         currentVersionGUID = fetchedVer;
                         localStorage.setItem('rbx_cached_version', currentVersionGUID);
-                        
+
                         if (text) {
                             text.innerText = fetchedVer;
                             text.classList.remove('version-text-updating');
                             void text.offsetWidth;
                             text.classList.add('version-text-updating');
                         }
-                        
+
                         if (card) {
                             card.classList.remove('flash-update');
                             void card.offsetWidth;
@@ -1229,7 +1189,7 @@
                             badge.innerText = "new update detected";
                             badge.className = "text-[11px] px-2 py-0.5 rounded bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-300 font-bold border border-blue-500/20 dark:border-blue-500/25";
                         }
-                        
+
                     } else {
                         if (badge) {
                             badge.innerText = force ? "up to date" : "cached";
@@ -1238,9 +1198,9 @@
                     }
                     return;
                 }
-                
+
                 throw new Error("All proxies failed");
-                
+
             } catch (err) {
                 console.error("Roblox version fetch error:", err);
                 if (badge) {
@@ -1277,12 +1237,12 @@
         window.addEventListener('DOMContentLoaded', () => {
             applyTheme();
             initCanvas();
-            
+
             document.getElementById('current-version-text').innerText = currentVersionGUID;
             renderOldVersions();
-            
+
             fetchRobloxVersion(false);
-            
+
             triggerCounters();
         });
     </script>

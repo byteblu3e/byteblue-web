@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>byteblue</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300..1000;1,300..1000&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customBlue: '#e5e5e5',
+                        darkBg: '#0a0a0a',
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(ellipse 140% 110% at 50% -30%, #ffffff 0%, #f5f5f5 35%, #ebebeb 65%, #e0e0e0 100%);
+            --text-main: #111111;
+            --text-muted: #52525b;
+            --text-dark: #1f2937;
+            
+            --glass-bg-1: rgba(255, 255, 255, 0.75);
+            --glass-bg-2: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --glass-hover-border: rgba(255, 255, 255, 1);
+            --glass-inner: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+            --glass-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.1), 0 4px 12px -5px rgba(0, 0, 0, 0.05);
+            
+            --topbar-scrolled: rgba(255, 255, 255, 0.85);
+            --topbar-border: rgba(255, 255, 255, 0.9);
+            
+            --orb-1: rgba(100, 100, 100, 0.08);
+            --orb-2: rgba(150, 150, 150, 0.06);
+            --orb-3: rgba(200, 200, 200, 0.04);
+            
+            --btn-bg: rgba(255, 255, 255, 0.6);
+            --btn-border: rgba(255, 255, 255, 0.9);
+            --btn-hover: rgba(255, 255, 255, 0.9);
+            
+            --item-bg: rgba(255, 255, 255, 0.4);
+            --item-hover: rgba(255, 255, 255, 0.8);
+            --item-border: rgba(255, 255, 255, 0.7);
+
+            --divider: rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-mode {
+            --bg-gradient: radial-gradient(ellipse 140% 110% at 50% -30%, #242424 0%, #1a1a1a 35%, #121212 65%, #0a0a0a 100%);
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --text-dark: #e4e4e7;
+            
+            --glass-bg-1: rgba(255, 255, 255, 0.08);
+            --glass-bg-2: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-hover-border: rgba(255, 255, 255, 0.25);
+            --glass-inner: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            --glass-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+            
+            --topbar-scrolled: rgba(20, 20, 20, 0.85);
+            --topbar-border: rgba(255, 255, 255, 0.1);
+            
+            --orb-1: rgba(200, 200, 200, 0.10);
+            --orb-2: rgba(160, 160, 160, 0.08);
+            --orb-3: rgba(220, 220, 220, 0.06);
+            
+            --btn-bg: rgba(255, 255, 255, 0.08);
+            --btn-border: rgba(255, 255, 255, 0.12);
+            --btn-hover: rgba(255, 255, 255, 0.16);
+            
+            --item-bg: rgba(255, 255, 255, 0.04);
+            --item-hover: rgba(255, 255, 255, 0.08);
+            --item-border: rgba(255, 255, 255, 0.08);
+
+            --divider: rgba(255, 255, 255, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { height: 100%; }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 18px;
+            overflow-x: hidden;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        body:not(.dark-mode) .text-white { color: var(--text-main) !important; }
+        body:not(.dark-mode) .text-gray-200 { color: #374151 !important; }
+        body:not(.dark-mode) .text-gray-300 { color: #4b5563 !important; }
+        body:not(.dark-mode) .text-gray-400 { color: #6b7280 !important; }
+        body:not(.dark-mode) .text-gray-500 { color: #9ca3af !important; }
+        body:not(.dark-mode) .nav-link { color: #6b7280; }
+        body:not(.dark-mode) .nav-link:hover, body:not(.dark-mode) .nav-link.active { color: #111111; }
+        body:not(.dark-mode) .pfp-avatar { border-color: rgba(0,0,0,0.15); }
+
+        body.dark-mode .text-white { color: var(--text-main) !important; }
+        body.dark-mode .nav-link { color: #a1a1aa; }
+        body.dark-mode .nav-link:hover, body.dark-mode .nav-link.active { color: #ffffff; }
+        body.dark-mode .pfp-avatar { border-color: rgba(255,255,255,0.15); }
+
+        .cred-icon {
+            filter: invert(1) brightness(0.2);
+            transition: filter 0.3s ease;
+        }
+        body.dark-mode .cred-icon {
+            filter: none;
+        }
+
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            overflow: hidden;
+            pointer-events: none;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: drift 48s infinite alternate ease-in-out;
+            transition: background 0.5s ease;
+        }
+        .orb-1 { width: 540px; height: 540px; background: var(--orb-1); top: -12%; left: -12%; }
+        .orb-2 { width: 440px; height: 440px; background: var(--orb-2); bottom: -12%; right: -8%; animation-delay: -14s; }
+        .orb-3 { width: 340px; height: 340px; background: var(--orb-3); top: 42%; left: 58%; animation-delay: -28s; }
+
+        @keyframes drift {
+            0%   { transform: translate(0, 0) scale(1); }
+            50%  { transform: translate(35px, 22px) scale(1.06); }
+            100% { transform: translate(-22px, 42px) scale(0.94); }
+        }
+
+        #fx-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+            display: block;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(94%, 800px);
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            border-radius: 16px;
+        }
+        
+        .topbar.scrolled {
+            background: var(--topbar-scrolled);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border-color: var(--topbar-border);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+            top: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        
+        .nav-link {
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: lowercase;
+            cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link svg, .nav-link img { width: 18px; height: 18px; transition: transform 0.2s ease; }
+        .nav-link:hover svg, .nav-link:hover img { transform: scale(1.1); }
+        .nav-link:active { transform: scale(0.95); }
+
+        img[alt="roblox"] {
+            filter: brightness(0) invert(0.4);
+            image-rendering: -webkit-optimize-contrast;
+            transition: filter 0.2s ease;
+        }
+        
+        .nav-link:hover img[alt="roblox"], 
+        .nav-link.active img[alt="roblox"],
+        .section-title img[alt="roblox"] {
+            filter: brightness(0) invert(0);
+        }
+        
+        body.dark-mode img[alt="roblox"] {
+            filter: brightness(0) invert(0.65);
+        }
+        
+        body.dark-mode .nav-link:hover img[alt="roblox"], 
+        body.dark-mode .nav-link.active img[alt="roblox"],
+        body.dark-mode .section-title img[alt="roblox"] {
+            filter: brightness(0) invert(1);
+        }
+
+        .pfp-avatar {
+            width: 36px; height: 36px;
+            border-radius: 12px;
+            object-fit: cover;
+            display: block;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .pfp-avatar:hover { transform: scale(1.05); }
+
+        .page-view {
+            opacity: 0;
+            transform: translateY(8px);
+            visibility: hidden;
+            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+            position: absolute;
+            width: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+        }
+        
+        .page-view.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, var(--glass-bg-1), var(--glass-bg-2));
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: var(--glass-shadow), var(--glass-inner);
+            transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+            animation: cardEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        .glass-card:hover {
+            border-color: var(--glass-hover-border);
+        }
+
+        @keyframes cardEnter {
+            0% { opacity: 0; transform: translateY(15px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes flashUpdate {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.8); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); border-color: var(--glass-border); }
+        }
+        .flash-update { animation: flashUpdate 1s ease-out; }
+        
+        @keyframes versionPulse {
+            0% { opacity: 0; transform: translateY(-5px) scale(0.98); filter: blur(4px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        .version-text-updating {
+            animation: versionPulse 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .source-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 14px;
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .source-item:hover {
+            background: var(--item-hover);
+            border-color: var(--glass-hover-border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -8px rgba(0,0,0,0.15);
+        }
+        
+        .source-item .download-icon { transition: transform 0.3s ease, color 0.3s ease; flex-shrink: 0; }
+        .source-item:hover .download-icon { color: var(--text-main); transform: translateY(2px); }
+
+        .inline-icon-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            vertical-align: middle;
+            font-weight: 700;
+            color: var(--text-main);
+            transform: translateY(-1px);
+        }
+        
+        .inline-icon {
+            width: 18px; height: 18px;
+            object-fit: contain;
+            border-radius: 4px;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+        }
+
+        .accordion-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease-out, padding 0.3s ease-out, margin 0.3s ease-out;
+        }
+        
+        .accordion-content.open {
+            max-height: 1200px;
+            opacity: 1;
+            padding-top: 12px;
+            margin-top: 12px;
+            border-top: 1px solid var(--divider);
+        }
+        
+        .rotate-180 { transform: rotate(180deg); }
+
+        .notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.4;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .notice svg { width: 13px; height: 13px; flex-shrink: 0; margin-top: 1px; }
+        
+        .notice-red { background: rgba(239, 68, 68, 0.10); border: 1px solid rgba(239, 68, 68, 0.22); color: #f87171; }
+        body:not(.dark-mode) .notice-red { background: rgba(239, 68, 68, 0.1); color: #b91c1c; border-color: rgba(239, 68, 68, 0.3); }
+        
+        .notice-yellow { background: rgba(234, 179, 8, 0.10); border: 1px solid rgba(234, 179, 8, 0.22); color: #facc15; }
+        body:not(.dark-mode) .notice-yellow { background: rgba(234, 179, 8, 0.1); color: #a16207; border-color: rgba(234, 179, 8, 0.3); }
+
+        .lang-bubble {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, var(--glass-bg-1), var(--glass-bg-2));
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--glass-border);
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: default;
+            box-shadow: var(--glass-inner), 0 4px 10px -5px rgba(0,0,0,0.1);
+            animation: floatBubble 4s ease-in-out infinite;
+        }
+        
+        .lang-bubble:nth-child(even) { animation-delay: -2s; }
+        .lang-bubble:nth-child(3n) { animation-delay: -1s; }
+        
+        .lang-bubble img { width: 16px; height: 16px; object-fit: contain; transition: transform 0.3s ease; }
+        
+        .lang-bubble:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: var(--item-hover);
+            border-color: var(--glass-hover-border);
+            color: var(--text-main);
+            box-shadow: var(--glass-inner), 0 8px 20px -5px rgba(0,0,0,0.15);
+            animation-play-state: paused;
+        }
+        
+        .lang-bubble:hover img { transform: scale(1.15) rotate(5deg); }
+
+        .section-title { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        body.dark-mode .section-title { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+
+        .btn-download {
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            color: var(--text-main);
+            transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .btn-download:hover {
+            background: var(--btn-hover);
+            border-color: var(--glass-hover-border);
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-download:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        .crypto-box {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            transition: all 0.2s ease;
+        }
+        
+        .crypto-box:hover {
+            background: var(--item-hover);
+            border-color: var(--glass-hover-border);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px -4px rgba(0,0,0,0.1);
+        }
+        
+        .crypto-box .crypto-icon {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .crypto-box:hover .crypto-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(16px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass-bg-1);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 2000;
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast svg { width: 15px; height: 15px; color: var(--text-muted); flex-shrink: 0; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .orb, .lang-bubble { animation: none; }
+            .glass-card { animation: none; }
+        }
+    </style>
+</head>
+<body class="px-4 min-h-screen">
+
+    <div class="bg-orbs" id="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <canvas id="fx-canvas"></canvas>
+
+    <nav class="topbar" id="topbar">
+        <div class="nav-links">
+            <button onclick="switchTab('home')" id="nav-home" class="nav-link active">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>home</span>
+            </button>
+            <button onclick="switchTab('versions')" id="nav-versions" class="nav-link">
+                <img src="roblox.png" alt="roblox" class="w-5 h-5 object-contain" onerror="this.onerror=null; this.src='https://www.roblox.com/favicon.ico';">
+                <span>versions</span>
+            </button>
+            <button onclick="switchTab('sources')" id="nav-sources" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                <span>sources</span>
+            </button>
+            <button onclick="showAccountGen()" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span>account gen</span>
+            </button>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <button onclick="toggleTheme()" class="nav-link !p-0" aria-label="Toggle Theme">
+                <svg id="icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+                <svg id="icon-sun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+            </button>
+
+            <div onclick="switchTab('home')" class="flex items-center justify-center cursor-pointer">
+                <img src="pfp.png" alt="pfp" class="pfp-avatar" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1a1a1a/ffffff?text=pfp';">
+            </div>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-[800px] relative mt-[115px] mb-12">
+
+        <section id="page-home" class="page-view active space-y-10 pt-4">
+            <h1 class="section-title text-3xl font-black tracking-wide text-center transition-colors duration-300">
+                hi, im <span class="text-white">byte</span>
+            </h1>
+
+            <div class="flex flex-col items-center gap-5">
+                <p class="text-base text-gray-200 leading-relaxed font-normal text-center transition-colors duration-300">
+                    I code in multiple languages such as:
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/lua/lua-original.svg" alt="Luau">Luau</div>
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++">C++</div>
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" alt="C#">C#</div>
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML">HTML</div>
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS">CSS</div>
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python">Python</div>
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">JavaScript</div>
+                    <div class="lang-bubble"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js">Node.js</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center text-center space-y-6 mt-16">
+                <p class="text-base text-gray-200 leading-relaxed max-w-lg transition-colors duration-300">
+                    I'm currently working on a roblox external called
+                    <span class="inline-icon-wrap">
+                        <img src="bluberii.png" alt="bluberii" class="inline-icon" onerror="this.onerror=null; this.src='https://placehold.co/40x40/141414/ffffff?text=B';">
+                        bluberii
+                    </span>.
+                    It will release shortly with:
+                </p>
+                
+                <div class="flex items-center justify-center gap-12 py-2">
+                    <div class="text-center transform transition-transform hover:scale-110 duration-300">
+                        <div class="text-4xl font-black text-white leading-none drop-shadow-sm" id="stat-unc">0%</div>
+                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mt-2">UNC</div>
+                    </div>
+                    <div class="w-px h-14 bg-gray-300/50 dark:bg-white/10"></div>
+                    <div class="text-center transform transition-transform hover:scale-110 duration-300">
+                        <div class="text-4xl font-black text-white leading-none drop-shadow-sm" id="stat-sunc">0%</div>
+                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mt-2">SUNC</div>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-300 leading-relaxed max-w-sm transition-colors duration-300">
+                    This is a lightweight external executor made just for you.
+                </p>
+
+                <p class="text-xs text-gray-400 pt-2">
+                    release date: <span class="font-bold text-gray-300">unknown</span>
+                </p>
+
+                <div class="pt-8 mt-4 border-t border-black/5 dark:border-white/10 w-full max-w-sm flex flex-col items-center gap-4 transition-colors duration-300">
+                    <p class="text-sm font-bold text-gray-200 lowercase">want to help me out?</p>
+                    <div class="flex flex-col gap-3 w-full">
+                        
+                        <div class="crypto-box rounded-xl p-3 flex items-center gap-3 w-full group">
+                            <div class="w-8 h-8 rounded-full bg-[#345D9D]/10 flex items-center justify-center flex-shrink-0 crypto-icon shadow-sm">
+                                <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png?v=026" alt="LTC" class="w-4 h-4 object-contain">
+                            </div>
+                            <div class="text-[11px] sm:text-xs text-gray-300 font-mono select-all break-all text-left leading-tight">
+                                <span class="text-gray-400 font-sans font-bold">LTC:</span> LP4dD5S3VuiBvzoUU35QBpHUyx78bFpHVx
+                            </div>
+                        </div>
+
+                        <div class="crypto-box rounded-xl p-3 flex items-center gap-3 w-full group">
+                            <div class="w-8 h-8 rounded-full bg-[#14F195]/10 flex items-center justify-center flex-shrink-0 crypto-icon shadow-sm">
+                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=026" alt="Solana" class="w-4 h-4 object-contain">
+                            </div>
+                            <div class="text-[11px] sm:text-xs text-gray-300 font-mono select-all break-all text-left leading-tight">
+                                <span class="text-gray-400 font-sans font-bold">Solana:</span> 2tAF4WmQ9PkYGKx5NB89jPuYPLutzSbgC94EdgC5sw8B
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-versions" class="page-view space-y-4">
+            
+            <div class="flex items-center justify-center mt-6">
+                <h2 class="section-title text-xl font-black text-white lowercase flex items-center justify-center gap-2">
+                    <img src="roblox.png" alt="roblox" class="w-5 h-5 object-contain" onerror="this.onerror=null; this.src='https://www.roblox.com/favicon.ico';">
+                    roblox version
+                </h2>
+            </div>
+            
+            <div class="glass-card space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-gray-400 lowercase">current version</span>
+                    <span id="version-status" class="text-[11px] px-2 py-0.5 rounded bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 font-bold border border-black/10 dark:border-white/15 transition-colors duration-300">loading...</span>
+                </div>
+
+                <div class="py-3 text-center">
+                    <p id="current-version-text" class="text-xl font-mono text-white font-bold tracking-wider transition-colors duration-300">version-4ea8e85481e34f46</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="btn-download-zip" onclick="downloadRobloxZip()" class="btn-download font-extrabold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        download
+                    </button>
+                    <button onclick="copyVersionLink()" class="btn-download font-extrabold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-2" title="Copy Download Link">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        copy link
+                    </button>
+                </div>
+            </div>
+
+            <div id="old-versions-container" class="hidden glass-card space-y-4 mt-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-gray-400 lowercase">previous versions</span>
+                </div>
+                <div id="old-versions-list" class="flex flex-col gap-2"></div>
+            </div>
+
+        </section>
+
+        <section id="page-sources" class="page-view space-y-4">
+            <div class="flex items-center justify-between mb-2">
+                <h2 class="section-title text-xl font-black text-white lowercase flex items-center gap-2">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                        <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                    </svg>
+                    sources
+                </h2>
+            </div>
+
+            <div class="space-y-3">
+                
+                <div class="glass-card cursor-pointer overflow-hidden hover:border-white/20">
+                    <div class="flex items-center justify-between" onclick="toggleAccordion('modules', 'icon-modules')">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                            </svg>
+                            <span class="font-bold text-base text-white">Modules</span>
+                        </div>
+                        <svg id="icon-modules" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    
+                    <div id="content-modules" class="accordion-content text-sm text-gray-400">
+                        <div class="notice notice-red mb-4">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>Some modules aren't updated to the latest version — use at your own risk.</span>
+                        </div>
+                        
+                        <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-4">External</div>
+                        <div class="flex flex-col gap-1">
+                            <a href="https://github.com/byteblu3e/offsets/raw/main/modules/external/kitty-v1.1.zip" target="_blank" class="source-item">
+                                <img src="kittyicon.png" alt="Kitty Icon" class="w-10 h-10 object-contain rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=Icon';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">Kitty</h4>
+                                    <p class="text-[11px] text-gray-400">module (external)</p>
+                                </div>
+                                <div class="flex items-center gap-4 ml-auto">
+                                    <p class="text-[10px] text-gray-500 text-right hidden sm:block leading-tight">works for roblox version:<br><span class="text-gray-300 font-semibold">unknown</span></p>
+                                    <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-5">Internal</div>
+                        <div class="flex flex-col gap-1">
+                            <a href="https://github.com/byteblu3e/offsets/raw/main/modules/internal/supQModule.rar" target="_blank" class="source-item">
+                                <img src="supqicon.png" alt="supQModule Icon" class="w-10 h-10 object-contain rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=Icon';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">supQModule</h4>
+                                    <p class="text-[11px] text-gray-400">module (internal)</p>
+                                </div>
+                                <div class="flex items-center gap-4 ml-auto">
+                                    <p class="text-[10px] text-gray-500 text-right hidden sm:block leading-tight">works for roblox version:<br><span class="text-gray-300 font-semibold">unknown</span></p>
+                                    <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card cursor-pointer overflow-hidden hover:border-white/20">
+                    <div class="flex items-center justify-between" onclick="toggleAccordion('externals', 'icon-externals')">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                            </svg>
+                            <span class="font-bold text-base text-white">Externals</span>
+                        </div>
+                        <svg id="icon-externals" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div id="content-externals" class="accordion-content text-sm text-gray-400">
+                        <div class="flex flex-col gap-1">
+                            <a href="https://github.com/byteblu3e/offsets/raw/main/external/SimpleExternal.zip" target="_blank" class="source-item">
+                                <img src="simpleexternalicon.png" alt="Simple External Icon" class="w-10 h-10 object-contain rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=Icon';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">Simple External</h4>
+                                    <p class="text-[11px] text-gray-400">external</p>
+                                </div>
+                                <div class="flex items-center gap-4 ml-auto">
+                                    <p class="text-[10px] text-gray-500 text-right hidden sm:block leading-tight">works for roblox version:<br><span class="text-gray-300 font-semibold">unknown</span></p>
+                                    <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card cursor-pointer overflow-hidden hover:border-white/20">
+                    <div class="flex items-center justify-between" onclick="toggleAccordion('injectors', 'icon-injectors')">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                            </svg>
+                            <span class="font-bold text-base text-white">Injectors</span>
+                        </div>
+                        <svg id="icon-injectors" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div id="content-injectors" class="accordion-content text-sm text-gray-400 text-center">
+                        <div class="notice notice-yellow text-left mb-4">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>These injectors crash without an emulator.</span>
+                        </div>
+                        <p class="mt-2">No injectors added yet.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card cursor-pointer overflow-hidden hover:border-white/20">
+                    <div class="flex items-center justify-between" onclick="toggleAccordion('dumpers', 'icon-dumpers')">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4zm0 5c0 2.21 3.582 4 8 4s8-1.79 8-4" />
+                            </svg>
+                            <span class="font-bold text-base text-white">Dumpers</span>
+                        </div>
+                        <svg id="icon-dumpers" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div id="content-dumpers" class="accordion-content text-sm text-gray-400">
+                        <div class="flex flex-col gap-1">
+                            <a href="https://github.com/byteblu3e/offsets/raw/main/dumper/supQdumper.rar" target="_blank" class="source-item">
+                                <img src="supqicon.png" alt="supQdumper Icon" class="w-10 h-10 object-contain rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=Icon';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">supQdumper</h4>
+                                    <p class="text-[11px] text-gray-400">dumper</p>
+                                </div>
+                                <div class="flex items-center gap-4 ml-auto">
+                                    <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card cursor-pointer overflow-hidden hover:border-white/20">
+                    <div class="flex items-center justify-between" onclick="toggleAccordion('misc', 'icon-misc')">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg>
+                            <span class="font-bold text-base text-white">Misc</span>
+                        </div>
+                        <svg id="icon-misc" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div id="content-misc" class="accordion-content text-sm text-gray-400">
+                        
+                        <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-2">Internal Offsets/Struct/Encryptions</div>
+                        <div class="flex flex-col gap-1 mb-4">
+                            <a href="https://offsets.credosdev.lol/" target="_blank" class="source-item">
+                                <img src="cred.png" alt="Credoxy Icon" class="cred-icon w-10 h-10 object-contain flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=C';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">Credoxy Offsets</h4>
+                                    <p class="text-[11px] text-gray-400">by: @credosde_v</p>
+                                </div>
+                                <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
+
+                        <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-5">External Offsets/FFlags</div>
+                        <div class="flex flex-col gap-1 mb-4">
+                            <a href="https://offsets.imtheo.lol/" target="_blank" class="source-item">
+                                <img src="https://www.google.com/s2/favicons?domain=offsets.imtheo.lol&sz=64" alt="ImTheo Icon" class="w-10 h-10 object-contain flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=I';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">imtheo</h4>
+                                    <p class="text-[11px] text-gray-400">External Offsets/FFlags</p>
+                                </div>
+                                <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
+
+                        <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-5">Tutorials</div>
+                        <div class="flex flex-col gap-1 mb-4">
+                            <a href="https://reversals.space/" target="_blank" class="source-item">
+                                <img src="reversalicon.png" alt="Reversals Icon" class="w-10 h-10 object-contain flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=R';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">Reversals Space</h4>
+                                    <p class="text-[11px] text-gray-400">reversals.space</p>
+                                </div>
+                                <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
+
+                        <div class="text-[11px] font-bold text-gray-500 tracking-widest text-left px-2 mb-2 mt-5">Useful Servers</div>
+                        <div class="flex flex-col gap-1">
+                            
+                            <a href="https://discord.gg/VjB3S6FvUy" target="_blank" class="source-item">
+                                <img src="skidleaks.png" alt="SkidLeaks Icon" class="w-10 h-10 object-contain rounded-md flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=D';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">SkidLeaks</h4>
+                                    <p class="text-[11px] text-gray-400 leading-tight">This server has sources and leaks of your favorite executors.</p>
+                                </div>
+                                <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+
+                            <a href="https://discord.gg/Gb5nPNQfF" target="_blank" class="source-item">
+                                <img src="wea.png" alt="WhatExpsAre.Online Icon" class="w-10 h-10 object-contain rounded-md flex-shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/ffffff?text=W';">
+                                <div class="flex-1">
+                                    <h4 class="text-white font-bold text-sm mb-0.5">WhatExpsAre.Online</h4>
+                                    <p class="text-[11px] text-gray-400 leading-tight">This server tells you updates to executors and has their official links.</p>
+                                </div>
+                                <svg class="download-icon w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full text-center pb-8 text-sm text-gray-400 font-bold lowercase relative z-10 transition-colors duration-300">
+        made with 💖 by byteblue
+    </footer>
+
+    <div id="toast" class="toast">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <span id="toast-msg">account gen coming soon</span>
+    </div>
+
+    <script>
+        const iconMoon = document.getElementById('icon-moon');
+        const iconSun = document.getElementById('icon-sun');
+        let isDarkMode = localStorage.getItem('theme') === 'dark';
+
+        function applyTheme() {
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                iconMoon.classList.remove('hidden');
+                iconSun.classList.add('hidden');
+            } else {
+                document.body.classList.remove('dark-mode');
+                iconMoon.classList.add('hidden');
+                iconSun.classList.remove('hidden');
+            }
+            updateCanvasColors();
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            applyTheme();
+        }
+
+        const topbar = document.getElementById('topbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                topbar.classList.add('scrolled');
+            } else {
+                topbar.classList.remove('scrolled');
+            }
+        });
+
+        function animateValue(id, start, end, duration, suffix = '') {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+            
+            if (obj._animId) cancelAnimationFrame(obj._animId);
+            
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const c1 = 1.70158;
+                const c3 = c1 + 1;
+                const easeProgress = 1 + c3 * Math.pow(progress - 1, 3) + c1 * Math.pow(progress - 1, 2);
+                
+                const current = Math.floor(easeProgress * (end - start) + start);
+                obj.textContent = current + suffix;
+                
+                if (progress < 1) {
+                    obj._animId = window.requestAnimationFrame(step);
+                } else {
+                    obj.textContent = end + suffix; 
+                    obj._animId = null;
+                }
+            };
+            obj._animId = window.requestAnimationFrame(step);
+        }
+
+        function triggerCounters() {
+            setTimeout(() => {
+                animateValue('stat-unc', 0, 65, 2000, '%');
+                animateValue('stat-sunc', 0, 40, 2000, '%+');
+            }, 150);
+        }
+
+        let ctx, canvas, W, H, dpr;
+        let mx = 0.5, my = 0.5, cmx = 0.5, cmy = 0.5;
+        let waveColors = [
+            { base: 0.82, amp: 14, freq: 0.005,  color: '80, 80, 80', alpha: 0.04 },
+            { base: 0.90, amp: 22, freq: 0.0035, color: '100, 100, 100', alpha: 0.03 },
+            { base: 0.98, amp: 16, freq: 0.006,  color: '60, 60, 60', alpha: 0.02 }
+        ];
+
+        function initCanvas() {
+            canvas = document.getElementById('fx-canvas');
+            ctx = canvas.getContext('2d');
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            
+            function resize() {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = W * dpr;
+                canvas.height = H * dpr;
+                canvas.style.width = W + 'px';
+                canvas.style.height = H + 'px';
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            window.addEventListener('mousemove', (e) => {
+                mx = e.clientX / window.innerWidth;
+                my = e.clientY / window.innerHeight;
+            });
+            window.addEventListener('mouseleave', () => { mx = 0.5; my = 0.5; });
+
+            requestAnimationFrame(frame);
+        }
+
+        function updateCanvasColors() {
+            if (!isDarkMode) {
+                waveColors = [
+                    { base: 0.82, amp: 14, freq: 0.005,  color: '80, 80, 80', alpha: 0.04 },
+                    { base: 0.90, amp: 22, freq: 0.0035, color: '100, 100, 100', alpha: 0.03 },
+                    { base: 0.98, amp: 16, freq: 0.006,  color: '60, 60, 60', alpha: 0.02 }
+                ];
+            } else {
+                waveColors = [
+                    { base: 0.82, amp: 14, freq: 0.005,  color: '200, 200, 200', alpha: 0.06 },
+                    { base: 0.90, amp: 22, freq: 0.0035, color: '220, 220, 220', alpha: 0.05 },
+                    { base: 0.98, amp: 16, freq: 0.006,  color: '160, 160, 160', alpha: 0.04 }
+                ];
+            }
+        }
+
+        function frame(t) {
+            ctx.clearRect(0, 0, W, H);
+            cmx += (mx - cmx) * 0.06;
+            cmy += (my - cmy) * 0.06;
+
+            const time = t * 0.0005;
+            ctx.globalCompositeOperation = isDarkMode ? 'lighter' : 'source-over';
+
+            for (let i = 0; i < waveColors.length; i++) {
+                const w = waveColors[i];
+                const baseY = H * w.base;
+                const amp = w.amp + cmy * 45 + i * 4;
+                const phase = time * (1 + i * 0.35) + cmx * 6;
+
+                ctx.beginPath();
+                ctx.moveTo(0, H);
+                for (let x = 0; x <= W; x += 3) {
+                    const y = baseY
+                        + Math.sin(x * w.freq + phase) * amp
+                        + Math.sin(x * w.freq * 2.1 + phase * 1.6) * amp * 0.4;
+                    ctx.lineTo(x, y);
+                }
+                ctx.lineTo(W, H);
+                ctx.closePath();
+
+                const grad = ctx.createLinearGradient(0, baseY - amp * 2.2, 0, H);
+                grad.addColorStop(0, `rgba(${w.color}, 0)`);
+                grad.addColorStop(0.45, `rgba(${w.color}, ${w.alpha})`);
+                grad.addColorStop(1, `rgba(${w.color}, ${w.alpha * 0.35})`);
+                ctx.fillStyle = grad;
+                ctx.fill();
+            }
+            ctx.globalCompositeOperation = 'source-over';
+
+            requestAnimationFrame(frame);
+        }
+
+        document.addEventListener('mousemove', e => {
+            const nx = (e.clientX / window.innerWidth - 0.5);
+            const ny = (e.clientY / window.innerHeight - 0.5);
+            document.getElementById('bg-orbs').style.transform = `translate(${nx * 14}px, ${ny * 14}px)`;
+        });
+
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.textContent = msg;
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2400);
+        }
+
+        function showAccountGen() {
+            showToast('account gen coming soon');
+        }
+        window.showAccountGen = showAccountGen;
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            const v = document.getElementById('page-' + tabId);
+            if (v) v.classList.add('active');
+            const n = document.getElementById('nav-' + tabId);
+            if (n) n.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if (tabId === 'home') {
+                triggerCounters();
+            }
+        }
+        window.switchTab = switchTab;
+
+        function toggleAccordion(id, iconId) {
+            const c = document.getElementById('content-' + id);
+            const ic = document.getElementById(iconId);
+            c.classList.toggle('open');
+            ic.classList.toggle('rotate-180');
+        }
+        window.toggleAccordion = toggleAccordion;
+
+        let currentVersionGUID = localStorage.getItem('rbx_cached_version') || "version-4ea8e85481e34f46";
+        let oldVersions = JSON.parse(localStorage.getItem('rbx_old_versions') || '[]');
+        let isFetching = false;
+
+        function renderOldVersions() {
+            const container = document.getElementById('old-versions-container');
+            const list = document.getElementById('old-versions-list');
+            
+            if (oldVersions.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+            
+            container.classList.remove('hidden');
+            list.innerHTML = oldVersions.map(v => `
+                <div class="flex items-center justify-between p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10 transition-colors duration-300">
+                    <span class="font-mono text-xs text-gray-500 dark:text-gray-300">${v}</span>
+                    <div class="flex items-center gap-2">
+                        <button onclick="copyVersionLink('${v}')" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" title="Copy Link">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        </button>
+                        <a href="https://setup.rbxcdn.com/${v}-RobloxApp.zip" target="_blank" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" title="Download">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function fetchRobloxVersion(force = false) {
+            const badge = document.getElementById('version-status');
+            const text = document.getElementById('current-version-text');
+            const card = text.closest('.glass-card');
+
+            if (isFetching) return;
+            isFetching = true;
+
+            if (force && badge) {
+                badge.innerText = "checking...";
+                badge.className = "text-[11px] px-2 py-0.5 rounded bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 font-bold border border-black/10 dark:border-white/15";
+            } else if (!force && badge) {
+                badge.innerText = "cached";
+                badge.className = "text-[11px] px-2 py-0.5 rounded bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 font-bold border border-black/10 dark:border-white/15";
+            }
+
+            try {
+                const targetUrl = 'https://clientsettings.roblox.com/v2/client-version/WindowsPlayer';
+                let parsed = null;
+
+                try {
+                    const res = await fetch(`https://proxy.cors.dev/${targetUrl}`);
+                    if (res.ok) parsed = await res.json();
+                } catch(e) { console.warn("cors.dev failed", e); }
+
+                if (!parsed || !parsed.clientVersionUpload) {
+                    try {
+                        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`);
+                        if (res.ok) parsed = await res.json();
+                    } catch(e) { console.warn("allorigins failed", e); }
+                }
+
+                if (!parsed || !parsed.clientVersionUpload) {
+                    try {
+                        const res = await fetch(`https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`);
+                        if (res.ok) parsed = await res.json();
+                    } catch(e) { console.warn("corsproxy failed", e); }
+                }
+
+                if (parsed && parsed.clientVersionUpload) {
+                    const fetchedVer = parsed.clientVersionUpload;
+                    
+                    if (fetchedVer !== currentVersionGUID) {
+                        if (currentVersionGUID && !oldVersions.includes(currentVersionGUID)) {
+                            oldVersions.unshift(currentVersionGUID);
+                            localStorage.setItem('rbx_old_versions', JSON.stringify(oldVersions));
+                            renderOldVersions();
+                        }
+                        
+                        currentVersionGUID = fetchedVer;
+                        localStorage.setItem('rbx_cached_version', currentVersionGUID);
+                        
+                        if (text) {
+                            text.innerText = fetchedVer;
+                            text.classList.remove('version-text-updating');
+                            void text.offsetWidth;
+                            text.classList.add('version-text-updating');
+                        }
+                        
+                        if (card) {
+                            card.classList.remove('flash-update');
+                            void card.offsetWidth;
+                            card.classList.add('flash-update');
+                        }
+
+                        if (badge) {
+                            badge.innerText = "new update detected";
+                            badge.className = "text-[11px] px-2 py-0.5 rounded bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-300 font-bold border border-blue-500/20 dark:border-blue-500/25";
+                        }
+                        
+                    } else {
+                        if (badge) {
+                            badge.innerText = force ? "up to date" : "cached";
+                            badge.className = "text-[11px] px-2 py-0.5 rounded bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 font-bold border border-emerald-500/20 dark:border-emerald-500/25";
+                        }
+                    }
+                    return;
+                }
+                
+                throw new Error("All proxies failed");
+                
+            } catch (err) {
+                console.error("Roblox version fetch error:", err);
+                if (badge) {
+                    badge.innerText = force ? "fetch failed" : "cached";
+                    badge.className = "text-[11px] px-2 py-0.5 rounded bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 font-bold border border-black/10 dark:border-white/15";
+                }
+            } finally {
+                isFetching = false;
+            }
+        }
+        window.fetchRobloxVersion = fetchRobloxVersion;
+
+        function downloadRobloxZip() {
+            const url = `https://setup.rbxcdn.com/${currentVersionGUID}-RobloxApp.zip`;
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            a.click();
+        }
+        window.downloadRobloxZip = downloadRobloxZip;
+
+        function copyVersionLink(version = null) {
+            const v = version || currentVersionGUID;
+            const url = `https://setup.rbxcdn.com/${v}-RobloxApp.zip`;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showToast('Failed to copy link');
+            });
+        }
+        window.copyVersionLink = copyVersionLink;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            applyTheme();
+            initCanvas();
+            
+            document.getElementById('current-version-text').innerText = currentVersionGUID;
+            renderOldVersions();
+            
+            fetchRobloxVersion(false);
+            
+            triggerCounters();
+        });
+    </script>
+</body>
+</html>
